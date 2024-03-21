@@ -11,7 +11,6 @@ local coords3 = Config.Delivery2
 local message2 = Config.Delivery2Message
 local heading3 = Config.Delivery2PedHeading
 local model3 = Config.Delivery2PedModel
-
 local model4 = Config.Delivery3PedModel
 local message3 = Config.Delivery3Message
 local coords4 = Config.Delivery3
@@ -163,7 +162,6 @@ end)
         TriggerServerEvent('esx:addInventoryItem', 'burger', 3)
         showSubtitle(message1, 600000)
         SpawnEntity2(model2, coords2, heading2)
-         print('Ped1 Spawned')
         Wait(250)
     end)
 
