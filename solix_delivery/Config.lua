@@ -51,5 +51,3 @@ Config.Delivery3PedHeading = 298.5440
 Config.Delivery3 = vec3(-1045.7565, -228.4333, 38.0143) 
 
 Config.Delivery3Message = 'Your 3rd ~y~Delivery~w~ Is Now Ready Check Your Map'  -- The Location Where The Ped Will Spawn when the 3rd delivery is active
-
-Config.DontTouch = true
