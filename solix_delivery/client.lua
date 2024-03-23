@@ -39,7 +39,7 @@ FreezeEntityPosition(ped, true)
 function SpawnEntity2(model2, coords2, heading2)
     RequestModel(GetHashKey(model2))
     while not HasModelLoaded(GetHashKey(model2)) do
-        Wait(100)
+        Wait(30000)
     end
 	if not DoesEntityExist(ped2) then
      ped2 = CreatePed(CIVMALE, GetHashKey(model2), coords2, heading2, true, false)
