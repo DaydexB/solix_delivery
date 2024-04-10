@@ -11,29 +11,14 @@ AddEventHandler('solix_delivery:moddersAreWeird22392838', function()
     local randomprice = math.random(500, 1000)
     local playerId = source
     local xPlayer = ESX.GetPlayerFromId(playerId)
-    xPlayer.addAccountMoney ('money', randomprice)
+    xPlayer.addAccountMoney (Config.AccountToTake, randomprice)
 end)
 
 RegisterNetEvent('solix_delivery:giveItem')
-AddEventHandler('solix_delivery:giveItem', function(item)
+AddEventHandler('solix_delivery:giveItem', function(item, amount)
     local xPlayer = ESX.GetPlayerFromId(source)
 
-    xPlayer.addInventoryItem(item, 3)
-end)
-
-RegisterNetEvent('solix_delivery:giveItem1')
-AddEventHandler('solix_delivery:giveItem1', function(item)
-    local xPlayer = ESX.GetPlayerFromId(source)
-
-    xPlayer.addInventoryItem(item, 1)
-end)
-
-
-RegisterNetEvent('solix_delivery:giveItem2')
-AddEventHandler('solix_delivery:giveItem2', function(item)
-    local xPlayer = ESX.GetPlayerFromId(source)
-
-    xPlayer.addInventoryItem(item, 2)
+    xPlayer.addInventoryItem(item, amount)
 end)
 
 RegisterNetEvent('solix_delivery:removeItem')
