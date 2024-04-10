@@ -1,26 +1,6 @@
-local model = Config.StartJobPedModel
 local coords = Config.StartJobPedLocation
 local heading = Config.StartJobPedHeading
-
-local coords2 = Config.Delivery1
-local model2 = Config.Delivery1PedModel
-local heading2 = Config.Delivery1PedHeading
-local message1 = Config.Subtitle
-
-local coords3 = Config.Delivery2
-local message2 = Config.Subtitle2
-local heading3 = Config.Delivery2PedHeading
-local model3 = Config.Delivery2PedModel
-local model4 = Config.Delivery3PedModel
-local message3 = Config.Delivery3Message
-local coords4 = Config.Delivery3
-local heading4 = Config.Delivery3PedHeading
-
-local message4 = Config.ClockOutMessage
-
-
-
-
+local model = Config.StartJobPedModel
 RequestModel(GetHashKey(model))
 while not HasModelLoaded(GetHashKey(model)) do
     Wait(100)
@@ -34,6 +14,9 @@ SetBlockingOfNonTemporaryEvents(ped, true)
 FreezeEntityPosition(ped, true)
 
 function SpawnEntity2(model2, coords2, heading2)
+	local coords2 = Config.Delivery1
+	local model2 = Config.Delivery1PedModel
+	local heading2 = Config.Delivery1PedHeading
     RequestModel(GetHashKey(model2))
     while not HasModelLoaded(GetHashKey(model2)) do
         Wait(30000)
@@ -64,6 +47,9 @@ end
 end
 
 function SpawnEntity3(model3, coords3, heading3)
+	local coords3 = Config.Delivery2
+	local heading3 = Config.Delivery2PedHeading
+	local model3 = Config.Delivery2PedModel
     RequestModel(GetHashKey(model3))
     while not HasModelLoaded(GetHashKey(model3)) do
         Wait(100)
@@ -81,6 +67,9 @@ function SpawnEntity3(model3, coords3, heading3)
 end
 
 function SpawnEntity4(model4, coords4, heading4)
+	local model4 = Config.Delivery3PedModel
+	local coords4 = Config.Delivery3
+	local heading4 = Config.Delivery3PedHeading
     RequestModel(GetHashKey(model4))
     while not HasModelLoaded(GetHashKey(model4)) do
         Wait(100)
@@ -146,12 +135,12 @@ AddEventHandler('solix_delivery:startJob', function()
     if count >= 3 then
     else
         if count == 1 then
-            TriggerServerEvent('solix_delivery:giveItem2', 'burger')
+            TriggerServerEvent('solix_delivery:giveItem', 'burger', '2')
         else
             if count == 2 then
-                TriggerServerEvent('solix_delivery:giveItem1', 'burger')
+                TriggerServerEvent('solix_delivery:giveItem', 'burger', '1')
             else
-    TriggerServerEvent('solix_delivery:giveItem', 'burger')
+    TriggerServerEvent('solix_delivery:giveItem', 'burger', '3')
             end
         end
     end
@@ -160,7 +149,6 @@ end)
    
    RegisterNetEvent('solix_delivery:delivery1InProgress')
     AddEventHandler('solix_delivery:delivery1InProgress', function()
-        TriggerServerEvent('esx:addInventoryItem', 'burger', 3)
         showSubtitle(Config.Subtitle1, 600000)
         SpawnEntity2(model2, coords2, heading2)
         Wait(250)
