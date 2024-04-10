@@ -5,10 +5,10 @@ local heading = Config.StartJobPedHeading
 local coords2 = Config.Delivery1
 local model2 = Config.Delivery1PedModel
 local heading2 = Config.Delivery1PedHeading
-local message1 = Config.Delivery1Message
+local message1 = Config.Subtitle
 
 local coords3 = Config.Delivery2
-local message2 = Config.Delivery2Message
+local message2 = Config.Subtitle2
 local heading3 = Config.Delivery2PedHeading
 local model3 = Config.Delivery2PedModel
 local model4 = Config.Delivery3PedModel
@@ -20,9 +20,6 @@ local message4 = Config.ClockOutMessage
 
 
 
-local ped2 = nil
-local ped3 = nil
-local ped4 = nil
 
 RequestModel(GetHashKey(model))
 while not HasModelLoaded(GetHashKey(model)) do
@@ -42,6 +39,7 @@ function SpawnEntity2(model2, coords2, heading2)
         Wait(30000)
     end
 	if not DoesEntityExist(ped2) then
+	local ped2 = nil
      ped2 = CreatePed(CIVMALE, GetHashKey(model2), coords2, heading2, true, false)
     Wait(250)
     SetEntityInvincible(ped2, true)
@@ -52,12 +50,26 @@ function SpawnEntity2(model2, coords2, heading2)
     end
 end
 
+	function HandOverAnim()
+          local playerPed = PlayerPedId()
+          local playerDict = "mp_common" 
+          local playerAnim = "givetake1_a"
+	RequestAnimDict(playerDict)
+    
+        while not HasAnimDictLoaded(playerDict) do
+            Wait(100)
+        end
+	TaskPlayAnim(playerPed, playerDict, playerAnim, 8.0, 8.0, -1, 0, 0, false, false, false)
+        Wait(2000)
+end
+
 function SpawnEntity3(model3, coords3, heading3)
     RequestModel(GetHashKey(model3))
     while not HasModelLoaded(GetHashKey(model3)) do
         Wait(100)
     end
     if not DoesEntityExist(ped3) then
+    local ped3 = nil
      ped3 = CreatePed(CIVMALE, GetHashKey(model3), coords3, heading3, true, false)
     Wait(250)
     SetEntityInvincible(ped3, true)
@@ -74,6 +86,7 @@ function SpawnEntity4(model4, coords4, heading4)
         Wait(100)
     end
     if not DoesEntityExist(ped4) then
+    local ped4 = nil
     ped4 = CreatePed(CIVMALE, GetHashKey(model4), coords4, heading4, true, false)
     Wait(250)
     SetEntityInvincible(ped4, true)
@@ -181,29 +194,17 @@ end)
         Wait(10000)
         DeleteEntity(ped4)
         SetNewWaypoint(Config.StartJobPedLocation)
-        showSubtitle4(message4, 600000)
+        showSubtitle4(Config.Subtitle4, 600000)
     end)
 
     RegisterNetEvent('solix_delivery:handOverAnimation')
     AddEventHandler('solix_delivery:handOverAnimation', function()
         hideSubtitle() 
-        local playerPed = PlayerPedId()
-        local playerDict = "mp_common" 
-        local playerAnim = "givetake1_a"
         local count = exports.ox_inventory:Search('count', 'burger')
-
         if count <= 0 then
             ESX.ShowNotification('You Dont Have Enough Items To Deliver!')
         else
-    
-        RequestAnimDict(playerDict)
-    
-        while not HasAnimDictLoaded(playerDict) do
-            Wait(100)
-        end
-    
-        TaskPlayAnim(playerPed, playerDict, playerAnim, 8.0, 8.0, -1, 0, 0, false, false, false)
-        Wait(2000)
+	HandOverAnim()
         TriggerServerEvent('solix_delivery:removeItem', 'burger')
         Wait(2000)
         tipSystem()
@@ -216,23 +217,10 @@ end)
     RegisterNetEvent('solix_delivery:handOverAnimation2')
     AddEventHandler('solix_delivery:handOverAnimation2', function()
         hideSubtitle() 
-        local playerPed = PlayerPedId()
-        local playerDict = "mp_common" 
-        local playerAnim = "givetake1_a"
         local count = exports.ox_inventory:Search('count', 'burger')
-
-        if count <= 0 then
-            
+        if count <= 0 then 
         else
-    
-        RequestAnimDict(playerDict)
-    
-        while not HasAnimDictLoaded(playerDict) do
-            Wait(100)
-        end
-    
-        TaskPlayAnim(playerPed, playerDict, playerAnim, 8.0, 8.0, -1, 0, 0, false, false, false)
-        Wait(2000)
+	HandOverAnim()
         TriggerServerEvent('solix_delivery:removeItem', 'burger')
         Wait(2000)
         tipSystem()
@@ -243,26 +231,15 @@ end)
     end)
 
 
+
     RegisterNetEvent('solix_delivery:handOverAnimation3')
     AddEventHandler('solix_delivery:handOverAnimation3', function()
         hideSubtitle() 
-        local playerPed = PlayerPedId()
-        local playerDict = "mp_common" 
-        local playerAnim = "givetake1_a"
         local count = exports.ox_inventory:Search('count', 'burger')
-
         if count <= 0 then
             ESX.ShowNotification('You Dont Have Enough Items To Deliver!')
         else
-    
-        RequestAnimDict(playerDict)
-    
-        while not HasAnimDictLoaded(playerDict) do
-            Wait(100)
-        end
-    
-        TaskPlayAnim(playerPed, playerDict, playerAnim, 8.0, 8.0, -1, 0, 0, false, false, false)
-        Wait(2000)
+	HandOverAnim()
         TriggerServerEvent('solix_delivery:removeItem', 'burger')
         Wait(2000)
         tipSystem()
