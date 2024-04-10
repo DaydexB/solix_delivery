@@ -94,21 +94,9 @@ function hideSubtitle()
     ClearPrints()
 end
 
-function showSubtitle2(message2, duration)
+function showSubtitle(message, duration)
     BeginTextCommandPrint('STRING')
     AddTextComponentString(message2)
-    EndTextCommandPrint(duration, true)
-end
-
-function showSubtitle3(message3, duration)
-    BeginTextCommandPrint('STRING')
-    AddTextComponentString(message3)
-    EndTextCommandPrint(duration, true)
-end
-
-function showSubtitle4(message4, duration)
-    BeginTextCommandPrint('STRING')
-    AddTextComponentString(message4)
     EndTextCommandPrint(duration, true)
 end
 
@@ -160,7 +148,7 @@ end)
    RegisterNetEvent('solix_delivery:delivery1InProgress')
     AddEventHandler('solix_delivery:delivery1InProgress', function()
         TriggerServerEvent('esx:addInventoryItem', 'burger', 3)
-        showSubtitle(message1, 600000)
+        showSubtitle(Config.Subtitle1, 600000)
         SpawnEntity2(model2, coords2, heading2)
         Wait(250)
     end)
@@ -170,7 +158,7 @@ end)
         RequestModel(Config.Delivery2PedModel)
         deliveryOption = true
         Wait(15000)       
-        showSubtitle2(message2, 6000000)
+        showSubtitle2(Config.Subtitle2, 600000)
         SetNewWaypoint(Config.Delivery2)
         Wait(1000) 
         SpawnEntity3(model3, coords3, heading3)
@@ -182,7 +170,7 @@ end)
         delivery2Option = true
         Wait(10000)
         DeleteEntity(ped3)
-        showSubtitle3(message3, 600000)
+        showSubtitle3(Config.Subtitle3, 600000)
         SetNewWaypoint(Config.Delivery3)
         SpawnEntity4(model4, coords4, heading4)
     end)
